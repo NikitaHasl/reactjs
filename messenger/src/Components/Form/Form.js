@@ -1,8 +1,11 @@
 import {useState} from "react";
-
+import {Button, TextField} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import PropTypes from "prop-types";
 import './Form.styles.css';
 
-export const Form = (props) => {
+
+export const Form = ({addMessage}) => {
 
     const [value, setValue] = useState('');
 
@@ -12,14 +15,18 @@ export const Form = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.addMessage(value);
+        addMessage(value);
         setValue('');
     }
 
     return(
         <form onSubmit={handleSubmit}>
-            <input type="text" value={value} onChange={handleChange}/>
-            <input type="submit" value='Send'/>
+            <TextField variant={'standard'} value={value} onChange={handleChange} type={'text'} style={{width: '70%', marginRight: '15px', marginLeft:'5px'}}/>
+            <Button variant={'outlined'} endIcon={<SendIcon/>} type={'submit'}>Send</Button>
         </form>
     )
+}
+
+Form.propTypes = {
+    addMessage: PropTypes.func
 }

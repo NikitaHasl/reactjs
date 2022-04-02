@@ -1,30 +1,55 @@
 import './App.css';
 
-
-import {Message} from "./Components/Message/Message";
 import {useEffect, useState} from "react";
 import {Form} from "./Components/Form/Form";
+import {MessageList} from "./Components/MessageList/MessageList";
+import {ChatList} from "./Components/ChatList/ChatList";
 
+import {AUTHORS} from "./utils/constants";
+import {Box} from "@mui/material";
+
+const chatListArr = [
+    {
+        id: 0,
+        name: 'Dave',
+    },
+    {
+        id: 1,
+        name: 'Nikole',
+    },
+    {
+        id: 2,
+        name: 'John',
+    },
+];
 function App() {
     const [messageList, setMessageList] = useState([]);
 
-    const addMessage = (text, author = 'Nikita') => {
+    const addMessage = (text, author = AUTHORS.human) => {
         setMessageList([...messageList, {author: author, text: text}]);
     }
 
     useEffect(() => {
-        if (messageList.length > 0){
-            const author = messageList[messageList.length - 1].author;
-            author === "Nikita" && setTimeout(()=>{
-                addMessage('message send', 'robot');
+        let timeout;
+        if(messageList[messageList.length - 1]?.author === AUTHORS.human){
+            timeout = setTimeout(()=>{
+                addMessage('message send', AUTHORS.robot);
             }, 1500);
+        };
+
+        return () => {
+            clearTimeout(timeout);
         }
     }, [messageList]);
 
     return (
         <div className="App">
-            {messageList.map((msg, id) => <Message author={msg.author} text={msg.text} key={id}/>)}
-            <Form addMessage={addMessage}/>
+            <ChatList chatList={chatListArr}/>
+            <Box>
+                <MessageList messages={messageList}/>
+                <Form addMessage={addMessage}/>
+            </Box>
+
         </div>
     );
 }
