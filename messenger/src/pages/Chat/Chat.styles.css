@@ -1,0 +1,20 @@
+.chat{
+    display: flex;
+    min-height: inherit;
+}
+
+.chat-item {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-item form {
+
+    margin-bottom: 10px;
+}
+
+.chat-list {
+    flex: 1;
+    border-right: 1px solid black;
+}

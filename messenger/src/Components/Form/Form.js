@@ -21,7 +21,7 @@ export const Form = ({addMessage}) => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <TextField variant={'standard'} value={value} onChange={handleChange} type={'text'} style={{width: '70%', marginRight: '15px', marginLeft:'5px'}}/>
+            <TextField variant={'standard'} value={value} onChange={handleChange} type={'text'} sx={{width: '70%', marginRight: '15px', marginLeft:'5px'}}/>
             <Button variant={'outlined'} endIcon={<SendIcon/>} type={'submit'}>Send</Button>
         </form>
     )
