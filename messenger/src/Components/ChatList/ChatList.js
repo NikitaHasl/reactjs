@@ -5,7 +5,7 @@ export const ChatList = ({chatList}) => {
     const chats = [];
     for (let key in chatList) {
         chats.push(
-            <ListItem sx={{backgroundColor: '#f1f1f1'}}>
+            <ListItem key={key}>
                 <Link to={`/chat/${key}`}>
                     {key}
                 </Link>

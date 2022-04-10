@@ -2,8 +2,8 @@ import {useState} from "react";
 import {Button, TextField} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import PropTypes from "prop-types";
-import './Form.styles.css';
 
+import './Form.styles.css';
 
 export const Form = ({addMessage}) => {
 
