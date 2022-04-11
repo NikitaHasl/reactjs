@@ -16,7 +16,7 @@ header {
     height: 40px;
 }
 
-.activeNav {
+.active-link {
     text-decoration: none;
     color: #c9c9c8;
 }

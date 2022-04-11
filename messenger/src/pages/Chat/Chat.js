@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+
 import {AUTHORS} from "../../utils/constants";
+import {NoChat} from "../../Components/NoChat/NoChat";
 import {ChatList} from "../../Components/ChatList/ChatList";
 import {MessageList} from "../../Components/MessageList/MessageList";
 import {Form} from "../../Components/Form/Form";
-import {useParams} from "react-router-dom";
 import "./Chat.styles.css";
-import {NoChat} from "../../Components/NoChat/NoChat";
+
 
 const initMessages = {
     'Dave': [],
