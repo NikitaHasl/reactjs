@@ -1,9 +1,10 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Header.styles.css';
 
 export const Header = () => {
     const activeLinkClassName = (isActive) => isActive ? 'active-link' : undefined;
+
     return(
         <header>
             <nav>

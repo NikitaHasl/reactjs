@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 import {AUTHORS} from "../../utils/constants";
 import {NoChat} from "../../Components/NoChat/NoChat";
@@ -7,46 +8,58 @@ import {ChatList} from "../../Components/ChatList/ChatList";
 import {MessageList} from "../../Components/MessageList/MessageList";
 import {Form} from "../../Components/Form/Form";
 import "./Chat.styles.css";
-
-
-const initMessages = {
-    'Dave': [],
-    'Nik': [],
-    'Ann': [],
-};
+import {selectMessages} from "../../store/messages/selectors";
+import {setMessage} from "../../store/messages/actions";
 
 export default function Chat() {
-    const [messageList, setMessageList] = useState(initMessages);
+
     const {id} = useParams();
 
-    const addMessage = (text, author = AUTHORS.human) => {
-        setMessageList({...messageList, [id]: [...messageList[id], {text: text, author: author}]});
+    const messages = useSelector(selectMessages);
+
+    const dispatch = useDispatch();
+
+    const addMessage = (newMessage) => {
+        dispatch(setMessage(newMessage));
     }
+
+    const sendMessage = (text) => {
+        addMessage({
+            text,
+            author: AUTHORS.human,
+            id,
+        });
+    }
+
     useEffect(() => {
         let timeout;
-        const lastMsg = messageList[id]?.[messageList[id]?.length - 1]
+        const lastMsg = messages[id]?.[messages[id]?.length - 1]
         if (lastMsg?.author === AUTHORS.human) {
             timeout = setTimeout(() => {
-                addMessage('message send', AUTHORS.robot);
+                addMessage({
+                    text: 'message send',
+                    author: AUTHORS.robot,
+                    id,
+                });
             }, 1500);
         }
 
         return () => {
             clearTimeout(timeout);
         }
-    }, [messageList]);
+    }, [messages]);
 
     return (
         <div className='chat'>
             <div className='chat-list'>
-                <ChatList chatList={messageList}/>
+                <ChatList/>
             </div>
             <div className="chat-item">
                 {
-                    messageList[id] ?
+                    messages[id] ?
                         <>
-                            <MessageList messages={messageList[id]}/>
-                            <Form addMessage={addMessage}/>
+                            <MessageList messages={messages[id]}/>
+                            <Form onSubmit={sendMessage} id={id}/>
                         </> :
                         <NoChat/>
                 }
