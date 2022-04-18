@@ -23,7 +23,7 @@ export const Profile = () => {
         <>
             <h1>Profile page</h1>
             <label>
-                <input type="checkbox" onChange={handleChange}/>
+                <input type="checkbox" onChange={handleChange} checked={showName}/>
                 Show name
             </label>
             {showName && <h3>{name}</h3>}
