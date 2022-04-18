@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 
 import './App.css';
 import Chat from "./pages/Chat/Chat";
@@ -10,6 +10,7 @@ import {Footer} from "./Components/Footer/Footer";
 import {store} from "./store";
 
 function App() {
+
     return (
         <Provider store={store}>
             <Header/>

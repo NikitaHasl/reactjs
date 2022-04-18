@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import './Form.styles.css';
 
-export const Form = ({addMessage}) => {
+export const Form = ({ onSubmit }) => {
 
     const [value, setValue] = useState('');
 
@@ -15,7 +15,7 @@ export const Form = ({addMessage}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addMessage(value);
+        onSubmit(value);
         setValue('');
     }
 
@@ -28,5 +28,5 @@ export const Form = ({addMessage}) => {
 }
 
 Form.propTypes = {
-    addMessage: PropTypes.func
+    onSubmit: PropTypes.func
 }
