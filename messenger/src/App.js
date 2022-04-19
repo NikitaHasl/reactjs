@@ -9,6 +9,7 @@ import {Profile} from "./pages/Profile/Profile";
 import {Header} from "./Components/Header/Header";
 import {Footer} from "./Components/Footer/Footer";
 import {persistor, store} from "./store";
+import {Characters} from "./pages/Characters/Characters";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                         <Route path='/chat' element={<Chat/>}>
                             <Route path=':id' element={<Chat/>}/>
                         </Route>
+                        <Route path='/characters/page/:page' element={<Characters/>}/>
                     </Routes>
                 </div>
                 <Footer/>

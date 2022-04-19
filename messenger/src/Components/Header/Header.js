@@ -18,6 +18,9 @@ export const Header = () => {
                     <li>
                         <NavLink to='/profile' className={({ isActive })=> activeLinkClassName(isActive)}>Profile</NavLink>
                     </li>
+                    <li>
+                        <NavLink to='/characters/page/1' className={({ isActive })=> activeLinkClassName(isActive)}>Rick and Morty</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
