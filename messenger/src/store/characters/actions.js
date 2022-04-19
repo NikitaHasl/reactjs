@@ -4,8 +4,9 @@ export const GET_CHARACTERS_REQUEST = 'CHARACTERS::GET_CHARACTERS_REQUEST';
 export const GET_CHARACTERS_SUCCESS = 'CHARACTERS::GET_CHARACTERS_SUCCESS';
 export const GET_CHARACTERS_FAILURE = 'CHARACTERS::GET_CHARACTERS_FAILURE';
 
-export const getCharactersRequest = () => ({
+export const getCharactersRequest = (query) => ({
     type: GET_CHARACTERS_REQUEST,
+    payload: query,
 });
 
 export const getCharactersSuccess = (data) => ({
@@ -18,10 +19,11 @@ export const getCharactersFailure = (error) => ({
     payload: error,
 })
 
-export const getCharacters = () => async (dispatch) =>{
+export const getCharacters = (page) => async (dispatch) =>{
     try {
-        dispatch(getCharactersRequest());
-        const response = await fetch(apiCharactersUrl);
+        const request = `${apiCharactersUrl}/?page=${page}`;
+        dispatch(getCharactersRequest(request));
+        const response = await fetch(request);
         if (!response.ok){
             throw new Error(`Response failed with status ${response.status}: ${response.statusText}`);
         }

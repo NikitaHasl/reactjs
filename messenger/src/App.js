@@ -10,6 +10,7 @@ import {Header} from "./Components/Header/Header";
 import {Footer} from "./Components/Footer/Footer";
 import {persistor, store} from "./store";
 import {Characters} from "./pages/Characters/Characters";
+import {Page404} from "./pages/Page404/Page404";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                             <Route path=':id' element={<Chat/>}/>
                         </Route>
                         <Route path='/characters/page/:page' element={<Characters/>}/>
+                        <Route path='*' element={<Page404/>}/>
                     </Routes>
                 </div>
                 <Footer/>

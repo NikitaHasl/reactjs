@@ -7,6 +7,7 @@ import {
 
 const initialState = {
     data: [],
+    info: {},
     status: FETCH_STATUSES.IDLE,
     error: null,
 }
@@ -33,7 +34,8 @@ export const charactersReducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 status: FETCH_STATUSES.SUCCESS,
-                data: payload,
+                data: payload.results,
+                info: payload.info,
             }
         }
 
