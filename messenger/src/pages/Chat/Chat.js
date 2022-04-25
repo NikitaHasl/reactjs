@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -8,7 +8,7 @@ import {MessageList} from "../../Components/MessageList/MessageList";
 import {Form} from "../../Components/Form/Form";
 import "./Chat.styles.css";
 import {selectMessagesByChatId} from "../../store/messages/selectors";
-import {addMessageWithApply} from "../../store/messages/actions";
+import {addMessageWithApply, initMessageOnChatTrack, stopMessageOnChatTrack} from "../../store/messages/actions";
 import {ChatListContainer} from "../../Components/ChatList/ChatListContainer";
 
 export default function Chat() {
@@ -19,7 +19,7 @@ export default function Chat() {
     const dispatch = useDispatch();
 
     const addMessage = (newMessage) => {
-        dispatch(addMessageWithApply(newMessage));
+        dispatch(addMessageWithApply(newMessage, id));
     }
 
     const sendMessage = (text) => {
@@ -29,6 +29,14 @@ export default function Chat() {
             id,
         });
     }
+
+    useEffect(()=>{
+        dispatch(initMessageOnChatTrack(id));
+
+        return () => {
+            dispatch(stopMessageOnChatTrack(id));
+        }
+    }, [id]);
 
     return (
         <div className='chat'>

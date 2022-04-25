@@ -1,23 +1,29 @@
 import {useDispatch, useSelector} from "react-redux";
 
 import {selectChats} from "../../store/chats/selectors";
-import {addChat, deleteChat} from "../../store/chats/actions";
-import {addMessages, deleteMessages} from "../../store/messages/actions";
+import {addChatFB, deleteChatFB, initChatsTrack, stopChatsTrack} from "../../store/chats/actions";
+import {
+    addMessagesFB,
+    deleteMessagesFB,
+    initMessagesTrack,
+    stopMessagesTrack
+} from "../../store/messages/actions";
 import {ChatList} from "./ChatList";
+import {useEffect} from "react";
 
 export const ChatListContainer = () => {
 
     const chats = useSelector(selectChats);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const addNewChat = (newChat) => {
-        dispatch(addChat(newChat));
-        dispatch(addMessages(newChat.id));
+        dispatch(addChatFB(newChat));
+        dispatch(addMessagesFB(newChat.id));
     }
 
     const removeChat = (id) => {
-        dispatch(deleteChat(id));
-        dispatch(deleteMessages(id));
+        dispatch(deleteChatFB(id));
+        dispatch(deleteMessagesFB(id));
     }
 
     const handleSubmit = (name) => {
@@ -27,6 +33,15 @@ export const ChatListContainer = () => {
         };
         addNewChat(newChat);
     }
+
+    useEffect(() => {
+        dispatch(initChatsTrack());
+        dispatch(initMessagesTrack());
+        return () => {
+            dispatch(stopChatsTrack());
+            dispatch(stopMessagesTrack());
+        }
+    }, []);
 
     return <ChatList chats={chats} handleSubmit={handleSubmit} removeChat={removeChat}/>
 }

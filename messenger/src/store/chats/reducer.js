@@ -1,21 +1,6 @@
-import {ADD_CHAT, DELETE_CHAT} from "./actions";
+import {ADD_CHAT, CLEAR_ALL_CHATS, DELETE_CHAT} from "./actions";
 
-const initialState = [
-    {
-        name: 'Dave',
-        id: 0,
-    },
-    {
-        name: 'Ann',
-        id: 1,
-    },
-    {
-        name: 'John',
-        id: 2,
-    },
-];
-
-export const chatsReducer = (state = initialState, {type, payload}) => {
+export const chatsReducer = (state = [], {type, payload}) => {
     switch (type) {
         case ADD_CHAT: {
             return [
@@ -26,6 +11,10 @@ export const chatsReducer = (state = initialState, {type, payload}) => {
 
         case DELETE_CHAT: {
             return state.filter(({id}) => id !== payload);
+        }
+
+        case CLEAR_ALL_CHATS: {
+            return [];
         }
 
         default:
