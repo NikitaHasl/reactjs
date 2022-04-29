@@ -1,12 +1,6 @@
-import {ADD_MESSAGES, DELETE_MESSAGES, SET_MESSAGE} from "./actions";
+import {ADD_MESSAGES, CLEAR_ALL_MESSAGES, CLEAR_CHAT_MESSAGES, DELETE_MESSAGES, SET_MESSAGE} from "./actions";
 
-const initialState = {
-    0: [],
-    1: [],
-    2: [],
-};
-
-export const messagesReducer = (state = initialState, {type, payload}) => {
+export const messagesReducer = (state = {}, {type, payload}) => {
     switch (type) {
         case SET_MESSAGE: {
             return {
@@ -29,6 +23,17 @@ export const messagesReducer = (state = initialState, {type, payload}) => {
             const copyState = {...state};
             delete copyState[payload];
             return copyState;
+        }
+
+        case CLEAR_ALL_MESSAGES: {
+            return {};
+        }
+
+        case CLEAR_CHAT_MESSAGES: {
+            return {
+                ...state,
+                [payload]: [],
+            }
         }
 
         default:
