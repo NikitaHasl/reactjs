@@ -19,7 +19,7 @@ export const getCharactersFailure = (error) => ({
     payload: error,
 })
 
-export const getCharacters = (page) => async (dispatch) =>{
+export const getCharacters = (page = 1) => async (dispatch) =>{
     try {
         const request = `${apiCharactersUrl}/?page=${page}`;
         dispatch(getCharactersRequest(request));
